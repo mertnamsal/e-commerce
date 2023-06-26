@@ -13,9 +13,8 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.hrp.exception.EErrorType.BAD_REQUEST_ERROR;
-import static com.hrp.exception.EErrorType.INTERNAL_ERROR;
-
+import static com.ecommerce.exception.EErrorType.BAD_REQUEST_ERROR;
+import static com.ecommerce.exception.EErrorType.INTERNAL_ERROR;
 
 @ControllerAdvice
 
