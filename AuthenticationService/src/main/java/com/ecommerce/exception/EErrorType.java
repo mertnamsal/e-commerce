@@ -14,6 +14,7 @@ public enum EErrorType {
     INTERNAL_ERROR(3000,"Unexpected error on server",INTERNAL_SERVER_ERROR),
     INVALID_TOKEN(4001,"Invalid token information",BAD_REQUEST),
     BAD_REQUEST_ERROR(1202,"You have entered an invalid parameter",BAD_REQUEST),
+    AUTH_LOGIN_ERROR(2000,"Already registered",BAD_REQUEST),
     TOKEN_NOT_FOUND(4000,"Token not found",BAD_REQUEST);
 
     private int code;

@@ -10,3 +10,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+rabbitmq:
+  exchange:
+    direct: "exchange-direct-auth"
+    fanout: "exchange-fanout-auth"
+    topic : "exchange-topic-auth"
+  key:
+    register: "key-auth"
+  queue:
+    register: "queue-auth-create-user"
