@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @Builder
-public class RegisterRequestDto {
+public class LoginRequestDto {
     @Size(min = 3, message = "Email must be valid.")
     @Email(message = "Email must be valid.", regexp = "[a-z0-9]((\\.|\\+)?[a-z0-9]){1,}@[a-z]+\\.[a-z]{2,3}")
     @NotBlank(message = "Email must be valid.")
@@ -22,13 +22,5 @@ public class RegisterRequestDto {
     @NotBlank(message = "Password must be valid.")
     @NotNull(message = "Password must be valid.")
     private String password;
-    @NotNull
-    @NotBlank
-    @Size(min = 2, max = 128)
-    private String name;
-    @NotNull
-    @NotBlank
-    @Size(min = 2, max = 128)
-    private String surname;
-
+    //Password length ll be  min 8
 }

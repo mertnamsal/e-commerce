@@ -9,7 +9,7 @@ spring:
     password: ${POSTGRES_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
 
 rabbitmq:
   exchange:
@@ -20,3 +20,5 @@ rabbitmq:
     register: "key-auth"
   queue:
     register: "queue-auth-create-user"
+jwt:
+  secret: "Od%43wuj5#]Q3`Ugq_|d2~uaiKPuK2M9$y2FAQv&U5*H@wL4`BKK[>@VX-#u"
