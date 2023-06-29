@@ -1,6 +1,5 @@
-#http://localhost:9090/swagger-ui/index.html
 server:
-  port: 9090
+  port: 9091
 
 spring:
   rabbitmq:
@@ -10,7 +9,7 @@ spring:
     password: user
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/EcAuthenticationDB
+    url: jdbc:postgresql://localhost:5432/EcUserDB
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
   jpa:

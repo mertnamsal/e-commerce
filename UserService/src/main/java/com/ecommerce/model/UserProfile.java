@@ -6,6 +6,7 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -13,14 +14,17 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Auth extends BaseEntity {
-
+public class UserProfile extends BaseEntity{
     @NotNull
     @NotBlank
-    private String mail;
+    private Long authid;
     @NotNull
     @NotBlank
-    private String password;
-
+    @Size(min = 2, max = 128)
+    private String name;
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 128)
+    private String surname;
 
 }

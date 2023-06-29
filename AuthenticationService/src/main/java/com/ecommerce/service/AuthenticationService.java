@@ -6,6 +6,8 @@ import com.ecommerce.dto.response.LoginResponseDto;
 import com.ecommerce.exception.AuthenticationException;
 import com.ecommerce.exception.EErrorType;
 import com.ecommerce.model.Auth;
+import com.ecommerce.rabbitmq.model.CreateUser;
+import com.ecommerce.rabbitmq.producer.CreateUserProducer;
 import com.ecommerce.repository.IAuthenticationRepository;
 import com.ecommerce.utility.JwtTokenManager;
 import com.ecommerce.utility.PasswordEncrypt;
@@ -21,29 +23,32 @@ public class AuthenticationService extends ServiceManagerImpl<Auth, Long> {
     private final IAuthenticationRepository authenticationRepository;
     private final JwtTokenManager jwtTokenManager;
     private final PasswordEncrypt passwordEncrypt;
+    private final CreateUserProducer createUserProducer;
 
-    public AuthenticationService(IAuthenticationRepository authenticationRepository, JwtTokenManager jwtTokenManager, PasswordEncrypt passwordEncrypt) {
+    public AuthenticationService(IAuthenticationRepository authenticationRepository, JwtTokenManager jwtTokenManager, PasswordEncrypt passwordEncrypt, CreateUserProducer createUserProducer) {
         super(authenticationRepository);
         this.authenticationRepository = authenticationRepository;
         this.jwtTokenManager = jwtTokenManager;
         this.passwordEncrypt = passwordEncrypt;
+        this.createUserProducer = createUserProducer;
     }
-    //Return password should be normal !!
+
     @Transactional
     public Auth register(RegisterRequestDto dto) {
         validateUniqueEmail(dto.getMail());
         String encryptedPassword = encryptPassword(dto.getPassword());
-        Auth auth = Auth.builder()
+        Auth auth = save(Auth.builder()
                 .mail(dto.getMail())
                 .password(encryptedPassword)
-                .build();
-        save(auth);
+                .build());
+
+        sendMessageToCreateUserQueue(auth, dto);
         return auth;
     }
+
     public LoginResponseDto login(LoginRequestDto dto) {
         String encryptedPassword = encryptPassword(dto.getPassword());
         Optional<Auth> auth = authenticationRepository.findOptionalByMailAndPassword(dto.getMail(), encryptedPassword);
-        System.out.println(dto.getMail()+ " "+dto.getPassword());
         if (auth.isEmpty()) {
             throw new AuthenticationException(EErrorType.INVALID_DATA);
         }
@@ -56,6 +61,7 @@ public class AuthenticationService extends ServiceManagerImpl<Auth, Long> {
             throw new AuthenticationException(EErrorType.AUTH_REGISTER_ERROR);
         }
     }
+
     private String generateAuthToken(Long userId) {
         Optional<String> token = jwtTokenManager.generateToken(userId);
         if (token.isEmpty()) {
@@ -63,7 +69,17 @@ public class AuthenticationService extends ServiceManagerImpl<Auth, Long> {
         }
         return token.get();
     }
-    private String encryptPassword(String password){
+
+    private String encryptPassword(String password) {
         return passwordEncrypt.generateEncryptPassword(password);
+    }
+
+    private void sendMessageToCreateUserQueue(Auth auth, RegisterRequestDto dto) {
+        CreateUser createUser = CreateUser.builder()
+                .authid(auth.getId())
+                .name(dto.getName())
+                .surname(dto.getSurname())
+                .build();
+        createUserProducer.createSendMessage(createUser);
     }
 }
