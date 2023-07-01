@@ -28,6 +28,6 @@ rabbitmq:
   key:
     register: "key-auth"
   queue:
-    register: "queue-auth-create-user"
+    register: "queue-auth-create-customer"
 jwt:
   secret: "Od%43wuj5#]Q3`Ugq_|d2~uaiKPuK2M9$y2FAQv&U5*H@wL4`BKK[>@VX-#u"

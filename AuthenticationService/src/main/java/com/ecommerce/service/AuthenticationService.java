@@ -6,8 +6,8 @@ import com.ecommerce.dto.response.LoginResponseDto;
 import com.ecommerce.exception.AuthenticationException;
 import com.ecommerce.exception.EErrorType;
 import com.ecommerce.model.Auth;
-import com.ecommerce.rabbitmq.model.CreateUser;
-import com.ecommerce.rabbitmq.producer.CreateUserProducer;
+import com.ecommerce.rabbitmq.model.CreateCustomer;
+import com.ecommerce.rabbitmq.producer.CreateCustomerProducer;
 import com.ecommerce.repository.IAuthenticationRepository;
 import com.ecommerce.utility.JwtTokenManager;
 import com.ecommerce.utility.PasswordEncrypt;
@@ -23,14 +23,14 @@ public class AuthenticationService extends ServiceManagerImpl<Auth, Long> {
     private final IAuthenticationRepository authenticationRepository;
     private final JwtTokenManager jwtTokenManager;
     private final PasswordEncrypt passwordEncrypt;
-    private final CreateUserProducer createUserProducer;
+    private final CreateCustomerProducer createCustomerProducer;
 
-    public AuthenticationService(IAuthenticationRepository authenticationRepository, JwtTokenManager jwtTokenManager, PasswordEncrypt passwordEncrypt, CreateUserProducer createUserProducer) {
+    public AuthenticationService(IAuthenticationRepository authenticationRepository, JwtTokenManager jwtTokenManager, PasswordEncrypt passwordEncrypt, CreateCustomerProducer createCustomerProducer) {
         super(authenticationRepository);
         this.authenticationRepository = authenticationRepository;
         this.jwtTokenManager = jwtTokenManager;
         this.passwordEncrypt = passwordEncrypt;
-        this.createUserProducer = createUserProducer;
+        this.createCustomerProducer = createCustomerProducer;
     }
 
     @Transactional
@@ -42,7 +42,7 @@ public class AuthenticationService extends ServiceManagerImpl<Auth, Long> {
                 .password(encryptedPassword)
                 .build());
 
-        sendMessageToCreateUserQueue(auth, dto);
+        sendMessageToCreateCustomerQueue(auth, dto);
         return auth;
     }
 
@@ -62,8 +62,8 @@ public class AuthenticationService extends ServiceManagerImpl<Auth, Long> {
         }
     }
 
-    private String generateAuthToken(Long userId) {
-        Optional<String> token = jwtTokenManager.generateToken(userId);
+    private String generateAuthToken(Long customerId) {
+        Optional<String> token = jwtTokenManager.generateToken(customerId);
         if (token.isEmpty()) {
             throw new AuthenticationException(EErrorType.TOKEN_NOT_FOUND);
         }
@@ -74,12 +74,12 @@ public class AuthenticationService extends ServiceManagerImpl<Auth, Long> {
         return passwordEncrypt.generateEncryptPassword(password);
     }
 
-    private void sendMessageToCreateUserQueue(Auth auth, RegisterRequestDto dto) {
-        CreateUser createUser = CreateUser.builder()
+    private void sendMessageToCreateCustomerQueue(Auth auth, RegisterRequestDto dto) {
+        CreateCustomer createCustomer = CreateCustomer.builder()
                 .authid(auth.getId())
                 .name(dto.getName())
                 .surname(dto.getSurname())
                 .build();
-        createUserProducer.createSendMessage(createUser);
+        createCustomerProducer.createSendMessage(createCustomer);
     }
 }

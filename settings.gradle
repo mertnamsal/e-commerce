@@ -2,5 +2,5 @@ rootProject.name = 'E-Commerce'
 include 'AuthenticationService'
 include 'ProductService'
 include 'ConfigServer'
-include 'UserService'
+include 'CustomerService'
 

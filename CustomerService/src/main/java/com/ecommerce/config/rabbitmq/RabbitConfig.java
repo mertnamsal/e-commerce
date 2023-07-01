@@ -1,4 +1,4 @@
-package com.ecommerce.config.rabbit;
+package com.ecommerce.config.rabbitmq;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

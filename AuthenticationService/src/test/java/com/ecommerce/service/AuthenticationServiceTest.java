@@ -5,8 +5,8 @@ import com.ecommerce.dto.request.RegisterRequestDto;
 import com.ecommerce.dto.response.LoginResponseDto;
 import com.ecommerce.exception.AuthenticationException;
 import com.ecommerce.model.Auth;
-import com.ecommerce.rabbitmq.model.CreateUser;
-import com.ecommerce.rabbitmq.producer.CreateUserProducer;
+import com.ecommerce.rabbitmq.model.CreateCustomer;
+import com.ecommerce.rabbitmq.producer.CreateCustomerProducer;
 import com.ecommerce.repository.IAuthenticationRepository;
 import com.ecommerce.utility.JwtTokenManager;
 import com.ecommerce.utility.PasswordEncrypt;
@@ -30,7 +30,7 @@ class AuthenticationServiceTest {
     @Mock
     private PasswordEncrypt passwordEncrypt;
     @Mock
-    private CreateUserProducer createUserProducer;
+    private CreateCustomerProducer createCustomerProducer;
     @InjectMocks
     private AuthenticationService authenticationService;
     @BeforeEach
@@ -72,7 +72,7 @@ class AuthenticationServiceTest {
 
         assertThrows(AuthenticationException.class, () -> authenticationService.register(requestDto));
         verify(authenticationRepository, never()).save(any(Auth.class));
-        verify(createUserProducer, never()).createSendMessage(any(CreateUser.class));
+        verify(createCustomerProducer, never()).createSendMessage(any(CreateCustomer.class));
     }
     @Test
     public void testLogin(){
