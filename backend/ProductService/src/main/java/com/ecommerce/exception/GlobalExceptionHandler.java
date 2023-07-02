@@ -27,9 +27,9 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler(AuthenticationException.class)
+    @ExceptionHandler(ProductException.class)
     @ResponseBody
-    public ResponseEntity<ErrorMessage> handleSpringMonoException(AuthenticationException exception){
+    public ResponseEntity<ErrorMessage> handleSpringMonoException(ProductException exception){
         return new ResponseEntity<>(createError(exception.getEErrorType(),exception),exception.getEErrorType().getHttpStatus());
     }
 

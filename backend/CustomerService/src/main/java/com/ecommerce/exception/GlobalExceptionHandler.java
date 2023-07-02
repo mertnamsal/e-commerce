@@ -71,7 +71,6 @@ public class GlobalExceptionHandler {
 
 
     private ErrorMessage createError(EErrorType EErrorType, Exception exception){
-        System.out.println("HATA OLDU.....: "+ exception.getMessage());
         return ErrorMessage.builder()
                 .code(EErrorType.getCode())
                 .message(EErrorType.getMessage())
