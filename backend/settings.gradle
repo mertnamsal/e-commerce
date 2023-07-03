@@ -3,4 +3,5 @@ include 'AuthenticationService'
 include 'ProductService'
 include 'ConfigServer'
 include 'CustomerService'
+include 'VendorService'
 
