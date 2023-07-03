@@ -1,5 +1,7 @@
 package com.ecommerce.utility;
 
+import com.ecommerce.exception.CustomerException;
+import com.ecommerce.exception.EErrorType;
 import com.ecommerce.model.BaseEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -44,8 +46,12 @@ public class ServiceManagerImpl <T extends BaseEntity,ID> implements IServiceMan
     }
 
     @Override
-    public Optional<T> findById(ID id) {
-        return repository.findById(id);
+    public T findById(ID id) {
+        Optional<T> t = repository.findById(id);
+        if(t.isEmpty()){
+            throw new CustomerException(EErrorType.CUSTOMER_NOT_FOUND);
+        }
+        return t.get();
     }
 }
 

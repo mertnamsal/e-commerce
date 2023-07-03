@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad08846a-a322-4336-8f4b-87d978f9a0bb" name="Changes" comment="" />
+    <list default="true" id="ad08846a-a322-4336-8f4b-87d978f9a0bb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/ProductService/src/main/java/com/ecommerce/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/ProductService/src/main/java/com/ecommerce/service/ProductService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +18,18 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -27,7 +43,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Win10/Desktop/E-commerce/E-Commerce/backend",
+    "last_opened_file_path": "C:/Users/Win10/Desktop/E-commerce/E-Commerce",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -40,6 +56,7 @@
       <option name="presentableId" value="Default" />
       <updated>1688296798229</updated>
       <workItem from="1688296801732" duration="44000" />
+      <workItem from="1688324848395" duration="78000" />
     </task>
     <servers />
   </component>

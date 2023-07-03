@@ -10,5 +10,5 @@ public interface IServiceManager <T,ID>{
     void delete(T t);
     void deleteById(ID id);
     List<T> findAll();
-    Optional<T> findById(ID id);
+    T findById(ID id);
 }
