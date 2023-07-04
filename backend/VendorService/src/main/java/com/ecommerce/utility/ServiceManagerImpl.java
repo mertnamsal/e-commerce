@@ -1,7 +1,7 @@
 package com.ecommerce.utility;
 
-import com.ecommerce.exception.AuthenticationException;
 import com.ecommerce.exception.EErrorType;
+import com.ecommerce.exception.VendorException;
 import com.ecommerce.model.BaseEntity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +49,7 @@ public class ServiceManagerImpl <T extends BaseEntity,ID> implements IServiceMan
     public T findById(ID id) {
         Optional<T> t = repository.findById(id);
         if(t.isEmpty()){
-            throw new AuthenticationException(EErrorType.AUTH_NOT_FOUND);
+            throw new VendorException(EErrorType.VENDOR_NOT_FOUND);
         }
         return t.get();
     }
