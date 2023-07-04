@@ -9,21 +9,15 @@ import com.ecommerce.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
-
-
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
@@ -38,6 +32,11 @@ public class AuthenticationController {
     public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid LoginRequestDto dto){
         return ResponseEntity.ok(authenticationService.login(dto));
     }
+    @PutMapping("/assign-vendor/{authid}")
+    public ResponseEntity<Boolean> assignVendorRole(@PathVariable Long authid){
+        return ResponseEntity.ok(authenticationService.assignVendorRole(authid));
+    }
+
 
 
 

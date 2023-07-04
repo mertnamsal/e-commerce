@@ -6,6 +6,7 @@ import com.ecommerce.dto.response.LoginResponseDto;
 import com.ecommerce.exception.AuthenticationException;
 import com.ecommerce.exception.EErrorType;
 import com.ecommerce.model.Auth;
+import com.ecommerce.model.enums.ERole;
 import com.ecommerce.rabbitmq.model.CreateCustomer;
 import com.ecommerce.rabbitmq.producer.CreateCustomerProducer;
 import com.ecommerce.repository.IAuthenticationRepository;
@@ -40,6 +41,7 @@ public class AuthenticationService extends ServiceManagerImpl<Auth, Long> {
         Auth auth = save(Auth.builder()
                 .mail(dto.getMail())
                 .password(encryptedPassword)
+                .role(ERole.CUSTOMER)
                 .build());
 
         sendMessageToCreateCustomerQueue(auth, dto);
@@ -81,5 +83,12 @@ public class AuthenticationService extends ServiceManagerImpl<Auth, Long> {
                 .surname(dto.getSurname())
                 .build();
         createCustomerProducer.createSendMessage(createCustomer);
+    }
+
+    public Boolean assignVendorRole(Long authId) {
+        Auth auth = findById(authId);
+        auth.setRole(ERole.VENDOR);
+        save(auth);
+        return true;
     }
 }
