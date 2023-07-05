@@ -35,6 +35,7 @@ public class AuthenticationController {
     @PutMapping("/assign-vendor/{authid}")
     public ResponseEntity<Boolean> assignVendorRole(@PathVariable Long authid){
         return ResponseEntity.ok(authenticationService.assignVendorRole(authid));
+
     }
 
 
