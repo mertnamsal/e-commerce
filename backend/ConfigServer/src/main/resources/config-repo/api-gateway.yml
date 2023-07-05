@@ -27,4 +27,34 @@ spring:
             - name: CircuitBreaker
               args:
                 name: auth
-                fallbackUri: forward:/fallbackauth
+                fallbackUri: forward:/fallbackauthentication
+        - id: customer
+          predicates:
+            - Path=/customer/**
+          uri: http://localhost:9091
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+            - name: CircuitBreaker
+              args:
+                name: customer
+                fallbackUri: forward:/fallbackcustomer
+        - id: product
+          predicates:
+            - Path=/product/**
+          uri: http://localhost:9092
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+            - name: CircuitBreaker
+              args:
+                name: product
+                fallbackUri: forward:/fallbackproduct
+        - id: vendor
+          predicates:
+            - Path=/vendor/**
+          uri: http://localhost:9093
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+            - name: CircuitBreaker
+              args:
+                name: vendor
+                fallbackUri: forward:/fallbackvendor
