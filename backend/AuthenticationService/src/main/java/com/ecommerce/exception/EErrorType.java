@@ -19,8 +19,6 @@ public enum EErrorType {
     AUTH_NOT_FOUND(2002,"Not found",BAD_REQUEST),
     TOKEN_NOT_FOUND(4000,"Token not found",BAD_REQUEST),
     EMPTY_TOKEN(4001,"Token Empty",BAD_REQUEST),
-
-
     ;
 
     private int code;
