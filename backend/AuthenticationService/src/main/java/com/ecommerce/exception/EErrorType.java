@@ -20,6 +20,7 @@ public enum EErrorType {
     TOKEN_NOT_FOUND(4000,"Token not found",BAD_REQUEST),
     EMPTY_TOKEN(4001,"Token Empty",BAD_REQUEST),
 
+
     ;
 
     private int code;
