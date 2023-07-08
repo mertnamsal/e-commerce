@@ -3,6 +3,7 @@ server:
 spring:
   main:
     web-application-type: reactive
+    allow-bean-definition-overriding: true
   cloud:
     gateway:
       globalcors:
@@ -58,3 +59,5 @@ spring:
               args:
                 name: vendor
                 fallbackUri: forward:/fallbackvendor
+jwt:
+  secret: "Od%43wuj5#]Q3`Ugq_|d2~uaiKPuK2M9$y2FAQv&U5*H@wL4`BKK[>@VX-#u"

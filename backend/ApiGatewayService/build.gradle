@@ -8,5 +8,10 @@ dependencies {
     implementation libs.springCloudCircuit
     implementation libs.springCloudCircuitReactor
     implementation libs.springCloudConfigClient
+    implementation 'com.auth0:java-jwt:4.3.0'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    implementation libs.springBootStarterSecurity
 
 }

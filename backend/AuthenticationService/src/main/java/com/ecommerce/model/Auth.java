@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Auth extends BaseEntity {
+public class Auth extends BaseEntity{
 
     @NotNull
     @NotBlank
