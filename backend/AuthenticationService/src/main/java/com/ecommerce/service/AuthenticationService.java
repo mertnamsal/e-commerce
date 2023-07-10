@@ -91,9 +91,4 @@ public class AuthenticationService extends ServiceManagerImpl<Auth, Long> {
         save(auth);
         return true;
     }
-
-    public Auth findByEmail(String mail) {
-       Optional<Auth> auth = authenticationRepository.findOptionalByMail(mail);
-       return auth.get();
-    }
 }
