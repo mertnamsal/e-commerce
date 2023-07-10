@@ -9,6 +9,7 @@ import com.ecommerce.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -36,6 +37,17 @@ public class AuthenticationController {
     public ResponseEntity<Boolean> assignVendorRole(@PathVariable Long authid){
         return ResponseEntity.ok(authenticationService.assignVendorRole(authid));
 
+    }
+
+    @GetMapping("/deneme-get")
+    @PreAuthorize("hasAuthority('CUSTOMER')")
+    public String getDeneme(){
+        return "Get deneme basarili";
+    }
+
+    @PostMapping("/deneme-post")
+    public String postDeneme(){
+        return "Post deneme basarili";
     }
 
 
